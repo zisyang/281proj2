@@ -26,7 +26,6 @@ cd backendapi/
 python3 -m venv venv
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
-pip3 install yfinance --upgrade --no-cache-dir
 ```
 To setup Frontend :
 ```
