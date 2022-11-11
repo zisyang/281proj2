@@ -1,8 +1,8 @@
 # Project #2-zisyang
-- [San Jose State University](http://www.sjsu.edu/)
-- [CMPE 281 - Cloud Technologies](http://info.sjsu.edu/web-dbgen/catalog/courses/CMPE281.html)
-- [Professor Sanjay Garje](https://www.linkedin.com/in/sanjaygarje/)
-- [Student: Zi Shun Yang](https://www.linkedin.com/in/zi-s-yang-1b764560/)
+- University Name: [San Jose State University](http://www.sjsu.edu/)
+- Course: [CMPE 281 - Cloud Technologies](http://info.sjsu.edu/web-dbgen/catalog/courses/CMPE281.html)
+- Professor: [Sanjay Garje](https://www.linkedin.com/in/sanjaygarje/)
+- Student: [Zi Shun Yang](https://www.linkedin.com/in/zi-s-yang-1b764560/)
 
 
 ## Project Introduction
