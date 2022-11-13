@@ -18,7 +18,7 @@ pipeline {
         stage('Check') {
             steps { 
                 echo 'Checking files in Webservers'
-                sh ' sudo /home/ec2-user/checkweb.sh' 
+                sh ' sudo /home/ec2-user/checkweb.sh'
             }
         }
     }
