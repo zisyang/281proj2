@@ -6,19 +6,19 @@ pipeline {
         stage('Ping') {
             steps {
                 echo 'Checking Webservers status'
-                sh '/tmp/pingweb.sh'
+                sh 'sudo /home/ec2-user/pingweb.sh'
             }
         }
         stage('Update') {
             steps {
                 echo 'Update Webservers'
-                sh '/tmp/putec2web.sh'
+                sh 'sudo /home/ec2-user/putec2web.sh'
             }
         }
         stage('Check') {
             steps { 
                 echo 'Checking files in Webservers'
-                sh ' /tmp/checkweb.sh' 
+                sh ' sudo /home/ec2-user/checkweb.sh' 
             }
         }
     }
