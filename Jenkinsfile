@@ -16,7 +16,7 @@ pipeline {
             }
         }
         stage('Check') {
-            steps {
+            steps { 
                 echo 'Checking files in Webservers'
                 sh ' /tmp/checkweb.sh' 
             }
