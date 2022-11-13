@@ -2,6 +2,7 @@
 yum update -y
 yum install httpd.x86_64 -y
 yum install git -y
+yum install mysql -y
 systemctl start httpd
 systemctl enable httpd
 cd /tmp
