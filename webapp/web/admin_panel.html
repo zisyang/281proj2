@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="js/vendor/jquery-3.1.0.js"></script>
+  <script src="js/vendor/bootstrap.min.js"></script>
+  <script src="js/vendor/aws-cognito-sdk.min.js"></script>
+  <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+  <script src="https://js.arcgis.com/4.3/"></script>
+  <script src="js/config_admin.js"></script>
+  <script src="js/cognito-auth.js"></script>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", Arial, Helvetica, sans-serif
+    }
+
+    .styled-table thead tr {
+      background-color: #009879;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .styled-table th,
+    .styled-table td {
+      padding: 1px 15px;
+    }
+
+    .styled-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+
+    .styled-table tbody tr.active-row {
+      font-weight: bold;
+      color: #009879;
+    }
+
+    .bgimg {
+      background-image: url('https://www.coreinfrastructure.org/wp-content/uploads/sites/6/2018/04/cii_bg_data_centre.jpg');
+
+      /* Full height */
+      height: 1000px;
+
+      /* Center and scale the image nicely */
+      background-position: right;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+
+
+  <title>Admin Panel</title>
+</head>
+
+<body class="bgimg w3-center">
+
+  <div class="w3-container w3-margin-top w3-center w3-white" id="Panel">
+    <h3>Admin Control Panel</h3>
+    <div class="w3-right">
+      <a href="index.html" onClick="myCognitoAuth.signOut();" class="w3-black"><i class="fa fa-sign-out w3-margin-right"></i>Sign Out</a>
+    </div>
+  </div>
+
+  <div class="w3-row-padding w3-padding-16">
+    <div class="w3-margin-bottom">
+      <div class="w3-container w3-white">
+        <h3>List of the files uploaded by all users</h3>
+        <button type="button" onclick="getfileListAPI()">Get uploaded file List</button>
+        <p class="styled-table" id="fileList" style="overflow: auto;"> </p>
+      </div>
+    </div>
+    <div class="w3-half w3-margin-bottom">
+    </div>
+
+    <script>
+      var username;
+
+      function updateUsername() {
+        myCognitoAuth.authUser
+          .then(e => { username = e.username; })
+          .catch(err => {
+            alert("not login " + err);
+            window.location.href = '/login.html';
+          });
+        return username;//getCookie('username');
+      }
+
+      $(document).ready(function () {
+        updateUsername();
+        getfileListAPI();
+      })
+
+
+      function toEmail(username) {
+        return username.replace('-at-', '@');
+      }
+
+
+      var getfileListAPI = async () => {  //Start of get boooking reservation API
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+          method: 'GET',
+          headers: myHeaders,
+          redirect: 'follow'
+        };
+        const res = await fetch(_config.api.invokeUrl + "/selectall", requestOptions);
+        const json = await res.json();
+        // console.log(json);
+        const body = json; //.body;
+        console.log("body:", body);
+
+        const ilen = Object.keys(body).length;
+        var col = [];
+        for (let i = 0; i < ilen; i++) {
+          for (var key in body[i]) {
+            if (col.indexOf(key) === -1) {
+              col.push(key);
+            }
+          }
+        }
+        console.log("col>>");
+        console.log(col);
+
+        var table = document.createElement("table");
+
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+          var th = document.createElement("th");      // TABLE HEADER.
+          if (col[i].toLocaleLowerCase().indexOf("id") > 0) {
+            th.innerHTML = "#"
+          }
+          else if (col[i] === "is_delete") {
+            th.innerHTML = "delete";
+          }
+          else {
+            th.innerHTML = col[i];
+          }
+          tr.appendChild(th);
+        }
+
+        for (var i = 0; i < ilen; i++) {
+
+          tr = table.insertRow(-1);
+
+          for (var j = 0; j < col.length; j++) {
+            var tabCell = tr.insertCell(-1);
+            var cellVal = body[i][col[j]]
+            if (col[j] === "user_email") {
+              cellVal = toEmail(cellVal);
+            } 
+            else if (col[j] === "is_delete") {
+              var deleteId = body[i]['file_id'];
+              cellVal = "<button onclick=callRDSdeletebyAPI('" + deleteId + "')>delete</button>";
+            }
+            tabCell.innerHTML = cellVal;
+          }
+        }
+
+        var divContainer = document.getElementById("fileList");
+        if (ilen == 0) {
+          divContainer.innerHTML = "Nothing uploaded";
+        }
+        else {
+          divContainer.innerHTML = "";
+          divContainer.appendChild(table);
+        }
+      }
+      
+      
+    var callRDSdeletebyAPI = async (deleteId) => {  //Start of cancelling hotel API
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var raw = JSON.stringify({
+        "file_id": deleteId
+      });
+      var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      const res = await fetch(_config.api.invokeUrl + "/deleteby", requestOptions);
+      const json = await res.json();
+      console.log(json);
+      if (json.affectedRows == "0") {
+        alert("Sorry! DB delete unsuccessfully")
+      } else {
+        console.log("DB delete successful");
+      }
+      getfileListAPI();
+    }
+
+
+    </script>
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- <link rel="stylesheet" href="css/font.css"> -->
+    <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+    <!-- <link rel="stylesheet" href="css/index.css"> -->
+    <!-- <link rel="stylesheet" href="/css/message.css"> -->
+</head>
+
+<script src="js/vendor/jquery-3.1.0.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/aws-cognito-sdk.min.js"></script>
+<script src="js/vendor/amazon-cognito-identity.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/cognito-auth.js"></script>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", Arial, Helvetica, sans-serif
+    }
+
+    .bgimg {
+        background-image: url('https://www.corporatevision-news.com/wp-content/uploads/2020/11/cv.jpg');
+
+        /* Full height */
+        height: 1000px;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!-- Navigation Bar -->
+    <div class="w3-bar w3-white w3-large">
+        <a href="index.html" class="w3-bar-item w3-button w3-black w3-mobile">
+            <i class="fa fa-home w3-margin-right"></i>
+        </a>
+    </div>
+    <div id="noCognitoMessage" class="configMessage" style="display: none;">
+        <div class="backdrop"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">No Cognito User Pool Configured</h3>
+            </div>
+            <div class="panel-body">
+                <p>There is no user pool configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this
+                    in Module 2 of the workshop.</p>
+            </div>
+        </div>
+    </div>
+
+    <header>
+
+    </header>
+
+    <section class=" w3-container w3-third">
+        <p>
+        <p>
+    </section>
+
+    <section class="form-wrap w3-container w3-third w3-center">
+        <h1 class="w3-white">Verify Email</h1>
+        <form id="verifyForm">
+            <p><input class="w3-input w3-padding-16 w3-border" type="email" id="emailInputVerify" placeholder="Email"
+                    required></p>
+
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" id="codeInputVerify"
+                    placeholder="Verification Code" pattern=".*" required></p>
+
+            <p><input class="w3-margin-bottom w3-button w3-blue w3-padding-large" type="submit" value="Verify"></p>
+        </form>
+    </section>
+
+
+    <section class=" w3-container w3-third">
+        <p>
+        <p>
+    </section>
+    <section class=" w3-container bgimg">
+        <p>
+        <p>
+    </section>
+
+</body>
+
+</html>

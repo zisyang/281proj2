@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <title>User HomePage</title>
+
+  <script src="https://unpkg.com/vue@1.0.28/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>
+  <script src="js/vendor/jquery-3.1.0.js"></script>
+  <script src="js/vendor/bootstrap.min.js"></script>
+  <script src="js/vendor/aws-cognito-sdk.min.js"></script>
+  <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/cognito-auth.js"></script>
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", Arial, Helvetica, sans-serif
+    }
+
+    .styled-table thead tr {
+      background-color: #009879;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .styled-table th,
+    .styled-table td {
+      padding: 1px 15px;
+    }
+
+    .styled-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+
+    .styled-table tbody tr.active-row {
+      font-weight: bold;
+      color: #009879;
+    }
+
+    .bgimg {
+      background-image: url('https://www.windream.com/fileadmin/user_upload/user_upload/Aktuelles/Presse/Cloud-news.png');
+
+      /* Full height */
+      height: 1000px;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    body {
+      background: #20262E;
+      padding: 20px;
+      font-family: sans-serif;
+    }
+
+    #app {
+      background: #fff;
+      border-radius: 4px;
+      padding: 20px;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    #logo {
+      width: 100px;
+    }
+
+    h2 {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    h1,
+    h2 {
+      font-weight: normal;
+      margin-bottom: 15px;
+    }
+
+    a {
+      color: #42b983;
+    }
+
+    img {
+      width: 30%;
+      margin: auto;
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body class="bgimg w3-center">
+
+
+  <div class="w3-container w3-margin-top w3-center w3-white" id="Panel">
+    <h3>User HomePage</h3>
+    <div class="w3-right">
+      <a href="index.html" onClick="myCognitoAuth.signOut();" class="w3-black"><i
+          class="fa fa-sign-out w3-margin-right"></i>Sign Out</a>
+    </div>
+  </div>
+
+  <div class="content" id="home">
+    <div class="textBox">
+      <p></p>
+    </div>
+    <div class="imgBox">
+      <p></p>
+    </div>
+  </div>
+
+
+  <section class="book" id="Upload">
+    <div class="container flex">
+      <div class="input grid">
+        <div id="app">
+          <h1>Uploader</h1>
+
+          <div v-if="!image">
+            <h2>Select an image</h2>
+            <input type="file" @change="onFileChange" accept="image/jpeg"></br>
+          </div>
+          <div v-else>
+            <img :src="image" />
+            <button v-if="!uploadURL" @click="removeImage">Remove image</button>
+            <button v-if="!uploadURL" @click="uploadImage">Upload image</button>
+          </div>
+          <h2 v-if="uploadURL">Success! Image uploaded to bucket.</h2>
+          <hr>
+          Upload by:
+          <input type="text" id="user_firstname" placeholder="firstname">
+          <input type="text" id="user_lastname" placeholder="lastname"></br>
+          <input type="text" id="description" placeholder="description" size="50">
+        </div>
+
+        <script>
+          const MAX_IMAGE_SIZE = 10 * 1024 * 1024
+
+          /* ENTER YOUR ENDPOINT HERE */
+
+          const API_ENDPOINT = 'https://m1xz6yhnwg.execute-api.us-west-1.amazonaws.com/uploads' // e.g. https://ab1234ab123.execute-api.us-east-1.amazonaws.com/uploads
+
+          new Vue({
+            el: "#app",
+            data: {
+              image: '',
+              uploadURL: '',
+              fileNAME: '',
+              uploadTIME: ''
+            },
+            methods: {
+              onFileChange(e) {
+                let files = e.target.files || e.dataTransfer.files
+                if (!files.length) return
+                console.log(files);
+                $("#description").val("image/jpeg")
+                this.createImage(files[0]);
+                this.fileNAME = files[0].name;
+              },
+              createImage(file) {
+                // var image = new Image()
+                let reader = new FileReader()
+                reader.onload = (e) => {
+                  console.log('length: ', e.target.result.includes('data:image/jpeg'))
+                  if (!e.target.result.includes('data:image/jpeg')) {
+                    return alert('Wrong file type - JPG only.')
+                  }
+                  if (e.target.result.length > MAX_IMAGE_SIZE) {
+                    return alert('Image is loo large.')
+                  }
+                  this.image = e.target.result
+                }
+                reader.readAsDataURL(file)
+              },
+              removeImage: function (e) {
+                console.log('Remove clicked')
+                this.image = ''
+              },
+              uploadImage: async function (e) {
+                console.log('Upload clicked')
+                // Get the presigned URL
+                const response = await axios({
+                  method: 'GET',
+                  url: API_ENDPOINT
+                })
+                console.log('Response: ', response)
+                console.log('Uploading: ', this.image)
+                let binary = atob(this.image.split(',')[1])
+                let array = []
+                for (var i = 0; i < binary.length; i++) {
+                  array.push(binary.charCodeAt(i))
+                }
+                let blobData = new Blob([new Uint8Array(array)], { type: 'image/jpeg' })
+                console.log('Uploading to: ', response.uploadURL)
+                const result = await fetch(response.uploadURL, {
+                  method: 'PUT',
+                  body: blobData
+                })
+                console.log('Result: ', result)
+                // Final URL for the user doesn't need the query string params
+                //this.uploadURL = response.uploadURL.split('?')[0]
+                this.uploadURL = response.cdn.split('?')[0]
+                this.uploadTIME = new Date(response.uploadTime).toISOString();
+                console.log("uploadURL:" + this.uploadURL);
+                console.log("uploadTime: " + this.uploadTIME);
+
+                var raw = JSON.stringify({
+                  "filename": this.fileNAME,
+                  "user_email": username,
+                  "user_firstname": $("#user_firstname").val(),
+                  "user_lastname": $("#user_lastname").val(),
+                  "upload_time": this.uploadTIME,
+                  "update_time": this.uploadTIME,
+                  "description": $("#description").val(),
+                  "download_link": this.uploadURL,
+                  "version": getVersion(this.fileNAME)
+                });
+                console.log(raw);
+                callRDSaddfileAPI(raw);
+              }
+            }
+          })
+
+          function getVersion(name) {
+            var c = 1;
+            for(var n in cacheFilename) {
+              console.log(cacheFilename[n])
+              if (cacheFilename[n] == name) {
+                c++;
+              }
+            }
+            console.log("version:" + c);
+            return c;
+          }
+          
+          var callRDSaddfileAPI = async (rawjson) => {  //Start of cancelling hotel API
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = rawjson;
+            var requestOptions = {
+              method: 'POST',
+              headers: myHeaders,
+              body: raw,
+              redirect: 'follow'
+            };
+            const res = await fetch(_config.api.invokeUrl + "/add", requestOptions);
+            const json = await res.json();
+            console.log("res: ");
+            console.log(json);
+            if (json.affectedRows == "0" || json.affectedRows == null) {
+              alert("Sorry! add to DB unsuccessfully")
+            } else {
+              console.log("add to DB successful");
+            }
+            getfileListByAPI();
+          }
+
+        </script>
+      </div>
+
+      <div class="w3-row-padding w3-padding-16">
+        <div class="w3-margin-bottom">
+          <div class="w3-container w3-white">
+            <h3>List of the files uploaded by all users</h3>
+            <button type="button" onclick="getfileListByAPI()">Get uploaded file List</button>
+            <p class="styled-table" id="fileList" style="overflow: auto;"> </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section id="searchhotelresult">
+    <div style="height:440; position:relative; overflow:auto" id="hotellist">
+
+    </div>
+
+  </section>
+
+  <script>
+    var username;
+    var cacheFilename;
+
+    function toEmail(username) {
+      return username.replace('-at-', '@');
+    }
+
+    function updateInput() {
+      var name = toEmail(username).split('@')[0];
+      let pattern = /[._-]/;
+      var names = name.split(pattern);
+      var fn = names[0];
+      var ln = names[1];
+      $("#user_firstname").val(fn);
+      $("#user_lastname").val(ln);
+      getfileListByAPI();
+    }
+
+    function updateUsername() {
+      myCognitoAuth.authUser
+        .then(e => {
+          username = e.username;
+          updateInput();
+        })
+        .catch(err => {
+          alert("not login " + err);
+          window.location.href = '/login.html';
+        });
+      // return username;//getCookie('username');
+    }
+
+    $(document).ready(function () {
+      updateUsername();
+    })
+
+    async function downloadlink(fileUrl, fileName) {
+      const image = await fetch(fileUrl);
+      const imageBlob = await image.blob();
+      const imageURL = URL.createObjectURL(imageBlob);
+
+      const link = document.createElement('a');
+      link.download = fileName;
+      link.href = imageURL;
+      //link.text = fileName;
+      console.log("saving " + fileUrl.substring(0, 10) + "..." +
+        fileUrl.substring(fileUrl.length - 10) + " to " + fileName + " ...");
+      link.click();
+      URL.revokeObjectURL(imageURL);
+    }
+
+    var getfileListByAPI = async () => {  //Start of get boooking reservation API
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      console.log(username);
+      var raw = JSON.stringify({
+        "user_email": username
+      });
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      const res = await fetch(_config.api.invokeUrl + "/selectby", requestOptions);
+      const json = await res.json();
+      // console.log(json);
+      const body = json; //.body;
+      console.log("body:", body);
+
+      const ilen = Object.keys(body).length;
+      var col = [];
+      for (let i = 0; i < ilen; i++) {
+        for (var key in body[i]) {
+          if (col.indexOf(key) === -1) {
+            col.push(key);
+          }
+        }
+      }
+
+      console.log("col>>");
+      console.log(col);
+
+      var table = document.createElement("table");
+
+      var tr = table.insertRow(-1);                   // TABLE ROW.
+
+      for (var i = 0; i < col.length; i++) {
+        var th = document.createElement("th");      // TABLE HEADER.
+        if (col[i].toLocaleLowerCase().indexOf("id") > 0) {
+          th.innerHTML = "#";
+        }
+        else if (col[i] == "is_delete") {
+          th.innerHTML = "delete";
+        }
+        else {
+          th.innerHTML = col[i];
+        }
+        tr.appendChild(th);
+      }
+      cacheFilename = [];
+      for (var i = 0; i < ilen; i++) {
+
+        tr = table.insertRow(-1);
+        cacheFilename.push(body[i]['filename']);
+        
+        for (var j = 0; j < col.length; j++) {
+          var tabCell = tr.insertCell(-1);
+          var cellVal = body[i][col[j]]
+          if (col[j] == "user_email") {
+            cellVal = toEmail(cellVal);
+          }
+          else if (col[j] == "download_link") {
+            //cellVal = downloadlink(cellVal, body[i]['filename']);
+            var url = cellVal;
+            var name = body[i]['filename'];
+            cellVal = "<button onclick=\"downloadlink('" + url + "', '" + name + "')\">Download</button>";
+          } 
+          else if (col[j] == "is_delete") {
+            var deleteId = body[i]['file_id'];
+            cellVal = "<button onclick=callRDSdeletebyAPI('" + deleteId + "')>delete</button>";
+          }
+          tabCell.innerHTML = cellVal;
+        }
+      }
+
+      var divContainer = document.getElementById("fileList");
+      if (ilen == 0) {
+        divContainer.innerHTML = "Nothing uploaded";
+      }
+      else {
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+      }
+    }
+
+    var callRDSdeletebyAPI = async (deleteId) => {  //Start of cancelling hotel API
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var raw = JSON.stringify({
+        "file_id": deleteId
+      });
+      var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      const res = await fetch(_config.api.invokeUrl + "/deleteby", requestOptions);
+      const json = await res.json();
+      console.log(json);
+      if (json.affectedRows == "0") {
+        alert("Sorry! DB delete unsuccessfully")
+      } else {
+        console.log("DB delete successful");
+      }
+      getfileListByAPI();
+    }
+
+
+  </script>
+
+
+
+</body>
+
+</html>

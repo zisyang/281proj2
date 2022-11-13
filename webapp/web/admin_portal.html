@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="js/vendor/jquery-3.1.0.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/aws-cognito-sdk.min.js"></script>
+    <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+    <script src="js/config_admin.js"></script>
+    <script src="js/cognito-auth.js"></script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", Arial, Helvetica, sans-serif
+        }
+
+        .bgimg {
+            background-image: url('https://m.economictimes.com/thumb/msid-79662826,width-1200,height-900,resizemode-4,imgsize-353062/cloud-computing.jpg');
+
+            /* Full height */
+            height: 1000px;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <title>Admin Portal</title>
+</head>
+
+<body class="bgimg">
+    <!-- Navigation Bar -->
+    <div class="w3-bar w3-white w3-large">
+        <a href="index.html" class="w3-bar-item w3-button w3-black w3-mobile">
+            <i class="fa fa-home w3-margin-right"></i>
+        </a>
+    </div>
+    <section class=" w3-container w3-third">
+        <p>
+        <p>
+    </section>
+    <section class="form-wrap w3-container w3-third w3-center">
+        <h2 class="w3-white">Admin Portal</h2>
+        <form id="signinForm">
+            <p><input class="w3-input w3-padding-16 w3-border w3-center" id="emailInputSignin" type="email"
+                    placeholder="Email" name="Email" pattern=".*" required></p>
+            <p><input class="w3-input w3-padding-16 w3-border w3-center" id="passwordInputSignin" type="password"
+                    placeholder="Password" pattern=".*" required></p>
+            <p>
+                <button class="w3-margin-bottom w3-button w3-green w3-padding-large " type="submit">Log In</button>
+            </p>
+        </form>
+    </section>
+    <section class=" w3-container w3-third">
+        <p>
+        <p>
+    </section>
+</body>
+
+</html>
