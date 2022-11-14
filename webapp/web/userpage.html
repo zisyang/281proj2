@@ -514,10 +514,10 @@
       const port = ":5000";
       const api = "/recipe?ingredients=%20";
       const invokeUrl = host + port + api;
-      const res = await fetch(invokeUrl);
+      const res = await fetch(invokeUrl + ingredients);
       const json2 = await res.json();
       console.log("Recipes:", json2);
-      
+
     }
 
     $(document).ready(function () {
