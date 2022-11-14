@@ -499,7 +499,8 @@
         method: 'POST',
         headers: myHeaders,
         body: raw,
-        redirect: 'follow'
+        redirect: 'follow',
+        
       };
       console.log("waiting rekognition ... ")
       const rekres = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
@@ -510,6 +511,10 @@
       var labels = body.map(obj=>obj.Name);
       console.log("labels:", labels);
 
+      
+      myHeaders.append("Access-Control-Allow-Origin", "");
+      myHeaders.append("Access-Control-Allow-Headers", "");
+      myHeaders.append("Access-Control-Allow-Methods", "*");
       requestOptions = {
         method: 'GET',
         headers: myHeaders,
