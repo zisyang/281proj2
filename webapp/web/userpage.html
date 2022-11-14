@@ -503,41 +503,13 @@
 
       };
       console.log("waiting rekognition ... ")
-      const rekres = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
-      const json = await rekres.json();
+      const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
+      const json = await res.json();
       // console.log(json);
       var statusCode = json.statusCode;
       var body = JSON.parse(json.body);
-      var labels = body.map(obj => obj.Name);
-      console.log("labels:", labels);
-
-
-      requestOptions = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': '',
-          'Access-Control-Allow-Methods': '*'
-        },
-        redirect: 'follow'
-      };
-      var ingredients = encodeURI(labels.toString().replaceAll(',', ' '));
-      const host = this.location.origin; // http://website.url
-      const port = ":5000";
-      const api = "/recipe?ingredients=%20";
-      const invokeUrl = host + port + api;
-      console.log(invokeUrl + ingredients);
-      console.log(requestOptions);
-      console.log("geting recipes ...");
-      await fetch(invokeUrl + ingredients, requestOptions)
-        .then(data => {
-          console.log(data);
-        }).catch(error => {
-          console.log(error);
-        });
-      //const json2 = await res.json();
-      //console.log("Recipes:", res);
+      //var recipes = body.map(obj => obj.Name);
+      console.log("recipes:", body);
 
 
     }
