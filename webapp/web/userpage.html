@@ -520,7 +520,7 @@
           'Access-Control-Allow-Headers': '',
           'Access-Control-Allow-Methods': '*'
         },
-        mode: 'no-cors'
+        redirect: 'follow'
       };
       var ingredients = encodeURI(labels.toString().replaceAll(',', ' '));
       const host = this.location.origin; // http://website.url
