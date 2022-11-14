@@ -13,3 +13,5 @@ docker run --net=host -p 5000:5000 -d jackmleitch/whatscooking:api
 cd /tmp
 git clone https://github.com/zisyang/281proj2.git
 cp -a /tmp/281proj2/webapp/web/* /var/www/html/
+
+
