@@ -439,7 +439,7 @@
             var url = cellVal;
             //var fname = body[i]['filename'];
             var urls = url.split('/');
-            var img = urls[urls.length-1];
+            var img = urls[urls.length - 1];
             cellVal = "<button onclick=\"getRecipeByAPI('" + img + "')\">Give Me Recipe</button>";
           }
           else if (col[j] == "is_delete") {
@@ -500,7 +500,7 @@
         headers: myHeaders,
         body: raw,
         redirect: 'follow',
-        
+
       };
       console.log("waiting rekognition ... ")
       const rekres = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
@@ -508,17 +508,20 @@
       // console.log(json);
       var statusCode = json.statusCode;
       var body = JSON.parse(json.body);
-      var labels = body.map(obj=>obj.Name);
+      var labels = body.map(obj => obj.Name);
       console.log("labels:", labels);
 
-      
-      myHeaders.append("Access-Control-Allow-Origin", "");
-      myHeaders.append("Access-Control-Allow-Headers", "");
-      myHeaders.append("Access-Control-Allow-Methods", "*");
+
       requestOptions = {
         method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '',
+          'Access-Control-Allow-Headers': '',
+          'Access-Control-Allow-Methods': '*'
+        },
+        redirect: 'follow',
+        mode: 'no-cors'
       };
       var ingredients = encodeURI(labels.toString().replaceAll(',', ' '));
       const host = this.location.origin; // http://website.url
