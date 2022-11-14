@@ -312,6 +312,7 @@
               body: raw,
               redirect: 'follow'
             };
+            console.log("adding to db ... ");
             const res = await fetch(_config.api.invokeUrl + "/add", requestOptions);
             const json = await res.json();
             console.log("res: ");
@@ -370,6 +371,7 @@
         body: raw,
         redirect: 'follow'
       };
+      console.log("loading files list by username ...");
       const res = await fetch(_config.api.invokeUrl + "/selectby", requestOptions);
       const json = await res.json();
       // console.log(json);
@@ -474,6 +476,7 @@
         body: raw,
         redirect: 'follow'
       };
+      console.log("deleting from db ...");
       const res = await fetch(_config.api.invokeUrl + "/deleteby", requestOptions);
       const json = await res.json();
       console.log(json);
@@ -498,6 +501,7 @@
         body: raw,
         redirect: 'follow'
       };
+      console.log("waiting rekognition ... ")
       const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
       const json = await res.json();
       // console.log(json);
