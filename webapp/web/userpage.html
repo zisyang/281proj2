@@ -421,8 +421,8 @@
           var cellVal = body[i][col[j]]
           if (col[j] == "filename") {
             var url = body[i]['download_link'];
-            cellVal = "<img src='" + url + "' width=100 height=100 alt='" + fname + "'><br>" + 
-            "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download</button>";
+            cellVal = "<img src='" + url + "' width='50' height='50' alt='" + fname + "'><br>" + fname +
+            "<br><button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download</button>";
           }
           else if (col[j] == "user_email") {
             cellVal = toEmail(cellVal);
