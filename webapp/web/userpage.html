@@ -104,6 +104,7 @@
 
     img {
       width: 30%;
+      height: 30%;
       margin: auto;
       display: block;
       margin-bottom: 10px;
@@ -421,7 +422,7 @@
           var cellVal = body[i][col[j]]
           if (col[j] == "filename") {
             var url = body[i]['download_link'];
-            cellVal = "<img src='" + url + "' height='50' alt='" + fname + "'><br>" + fname +
+            cellVal = "<img src='" + url + "' alt='" + fname + "'><br>" + fname +
             "<br><button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download</button>";
           }
           else if (col[j] == "user_email") {
