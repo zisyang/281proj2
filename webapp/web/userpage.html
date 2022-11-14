@@ -512,26 +512,43 @@
       console.log("labels:", labels);
 
 
-      requestOptions = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '',
-          'Access-Control-Allow-Headers': '',
-          'Access-Control-Allow-Methods': '*'
-        },
-        redirect: 'follow',
-        mode: 'no-cors'
-      };
+      // requestOptions = {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Access-Control-Allow-Origin': '',
+      //     'Access-Control-Allow-Headers': '',
+      //     'Access-Control-Allow-Methods': '*'
+      //   },
+      //   redirect: 'follow',
+      //   mode: 'no-cors'
+      // };
       var ingredients = encodeURI(labels.toString().replaceAll(',', ' '));
       const host = this.location.origin; // http://website.url
       const port = ":5000";
       const api = "/recipe?ingredients=%20";
       const invokeUrl = host + port + api;
       console.log("geting recipes ...");
-      const res = await fetch(invokeUrl + ingredients, requestOptions);
+      //const res = await fetch(invokeUrl + ingredients, requestOptions);
       //const json2 = await res.json();
-      console.log("Recipes:", res);
+      //console.log("Recipes:", res);
+
+      const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": invokeUrl + ingredients,
+        "method": "GET",
+        "headers": {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '',
+          'Access-Control-Allow-Headers': '',
+          'Access-Control-Allow-Methods': '*'
+        }
+      };
+      $.ajax(settings).done(function (response) {
+        console.log(response[0]);
+      });
+
 
     }
 
