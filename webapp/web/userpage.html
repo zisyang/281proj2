@@ -109,6 +109,64 @@
       margin-bottom: 10px;
     }
   </style>
+  <script>
+
+    var username;
+    var FversionMap = new Map();
+    var FinitDateMap = new Map();
+
+    function toEmail(username) {
+      return username.replace('-at-', '@');
+    }
+
+    function updateInput() {
+      var name = toEmail(username).split('@')[0];
+      let pattern = /[._-]/;
+      var names = name.split(pattern);
+      var fn = names[0];
+      var ln = names[1];
+      $("#user_firstname").val(fn);
+      $("#user_lastname").val(ln);
+      getfileListByAPI();
+    }
+
+    function updateUsername() {
+      myCognitoAuth.authUser
+        .then(e => {
+          username = e.username;
+          updateInput();
+        })
+        .catch(err => {
+          alert("not login " + err);
+          window.location.href = '/login.html';
+        });
+      // return username;//getCookie('username');
+    }
+
+    function findUploadtime(fname, utime) {
+      var d = FinitDateMap.get(fname);
+      if (d == null) d = utime;
+      console.log("initial upload Time:" + d);
+      return d;
+    }
+
+    function setUploadtime(fname, utime) {
+      FinitDateMap.set(fname, utime)
+    }
+
+    function getVersion(fname) {
+      var c = FversionMap.get(fname);
+      if (c == null) c = 0;
+      c++;
+      console.log("version:" + c);
+      return c;
+    }
+
+    function setVersion(fname, v) {
+      FversionMap.set(fname, v);
+    }
+
+  </script>
 </head>
 
 <body class="bgimg w3-center">
@@ -231,7 +289,7 @@
                   "user_email": username,
                   "user_firstname": $("#user_firstname").val(),
                   "user_lastname": $("#user_lastname").val(),
-                  "upload_time": this.uploadTIME,
+                  "upload_time": findUploadtime(this.fileNAME, this.uploadTIME),
                   "update_time": this.uploadTIME,
                   "description": $("#description").val(),
                   "download_link": this.uploadURL,
@@ -243,18 +301,6 @@
             }
           })
 
-          function getVersion(name) {
-            var c = 1;
-            for(var n in cacheFilename) {
-              console.log(cacheFilename[n])
-              if (cacheFilename[n] == name) {
-                c++;
-              }
-            }
-            console.log("version:" + c);
-            return c;
-          }
-          
           var callRDSaddfileAPI = async (rawjson) => {  //Start of add file API
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -294,40 +340,6 @@
   </section>
 
   <script>
-    var username;
-    var cacheFilename;
-
-    function toEmail(username) {
-      return username.replace('-at-', '@');
-    }
-
-    function updateInput() {
-      var name = toEmail(username).split('@')[0];
-      let pattern = /[._-]/;
-      var names = name.split(pattern);
-      var fn = names[0];
-      var ln = names[1];
-      $("#user_firstname").val(fn);
-      $("#user_lastname").val(ln);
-      getfileListByAPI();
-    }
-
-    function updateUsername() {
-      myCognitoAuth.authUser
-        .then(e => {
-          username = e.username;
-          updateInput();
-        })
-        .catch(err => {
-          alert("not login " + err);
-          window.location.href = '/login.html';
-        });
-      // return username;//getCookie('username');
-    }
-
-    $(document).ready(function () {
-      updateUsername();
-    })
 
     async function downloadlink(fileUrl, fileName) {
       const image = await fetch(fileUrl);
@@ -385,6 +397,12 @@
         if (col[i].toLocaleLowerCase().indexOf("id") > 0) {
           th.innerHTML = "#";
         }
+        else if (col[i] == "filename") {
+          th.innerHTML = "file";
+        }
+        else if (col[i] == "download_link") {
+          th.innerHTML = "Link to Recipe";
+        }
         else if (col[i] == "is_delete") {
           th.innerHTML = "delete";
         }
@@ -393,27 +411,39 @@
         }
         tr.appendChild(th);
       }
-      cacheFilename = [];
       for (var i = 0; i < ilen; i++) {
 
         tr = table.insertRow(-1);
-        cacheFilename.push(body[i]['filename']);
-        
+        var fname = body[i]['filename'];
+
         for (var j = 0; j < col.length; j++) {
           var tabCell = tr.insertCell(-1);
           var cellVal = body[i][col[j]]
-          if (col[j] == "user_email") {
+          if (col[j] == "filename") {
+            var url = body[i]['download_link'];
+            cellVal = "<img src='" + url + "' width=100 height=100 alt='" + fname + "'><br>" + 
+            "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download</button>";
+          }
+          else if (col[j] == "user_email") {
             cellVal = toEmail(cellVal);
+          }
+          else if (col[j] == "upload_time") {
+            var utime = cellVal;
+            setUploadtime(fname, utime);
           }
           else if (col[j] == "download_link") {
             //cellVal = downloadlink(cellVal, body[i]['filename']);
             var url = cellVal;
-            var name = body[i]['filename'];
-            cellVal = "<button onclick=\"downloadlink('" + url + "', '" + name + "')\">Download</button>";
-          } 
+            //var fname = body[i]['filename'];
+            cellVal = "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download</button>";
+          }
           else if (col[j] == "is_delete") {
             var deleteId = body[i]['file_id'];
             cellVal = "<button onclick=callRDSdeletebyAPI('" + deleteId + "')>delete</button>";
+          }
+          else if (col[j] == "version") {
+            var v = cellVal;
+            setVersion(fname, v);
           }
           tabCell.innerHTML = cellVal;
         }
@@ -451,6 +481,11 @@
       }
       getfileListByAPI();
     }
+
+
+    $(document).ready(function () {
+      updateUsername();
+    })
 
 
   </script>
