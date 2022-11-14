@@ -488,7 +488,7 @@
     var getRecipeByAPI = async (s3objname) => {  //Start of get boooking reservation API
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      console.log(s3objname);
+      console.log("s3objname: ", s3objname);
       var raw = JSON.stringify({
         "Image": s3objname
       });
