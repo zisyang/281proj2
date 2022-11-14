@@ -502,14 +502,22 @@
         redirect: 'follow'
       };
       console.log("waiting rekognition ... ")
-      const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
-      const json = await res.json();
+      const rekres = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
+      const json = await rekres.json();
       // console.log(json);
       var statusCode = json.statusCode;
       var body = JSON.parse(json.body);
-      var labels = body;
+      var labels = body.map(obj=>obj.Name);
       console.log("labels:", labels);
-
+      var ingredients = encodeURI(labels.toString().replaceAll(',', ' '));
+      const host = this.location.origin; // http://website.url
+      const port = ":5000";
+      const api = "/recipe?ingredients=%20";
+      const invokeUrl = host + port + api;
+      const res = await fetch(invokeUrl);
+      const json2 = await res.json();
+      console.log("Recipes:", json2);
+      
     }
 
     $(document).ready(function () {
