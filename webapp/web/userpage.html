@@ -506,8 +506,8 @@
       const json = await res.json();
       // console.log(json);
       var statusCode = json.statusCode;
-      var body = json.body;
-      var labels = body.map(obj=>obj.Name);
+      var body = JSON.parse(json.body);
+      var labels = body;
       console.log("labels:", labels);
 
     }
