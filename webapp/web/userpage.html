@@ -505,8 +505,9 @@
       const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
       const json = await res.json();
       // console.log(json);
-      const body = json; //.body;
-      console.log("body:", body);
+      var statusCode = json.statusCode;
+      var labels = json.body;
+      console.log("body:", labels);
 
     }
 
