@@ -512,17 +512,17 @@
       console.log("labels:", labels);
 
 
-       requestOptions = {
-         method: 'GET',
-         headers: {
-           'Content-Type': 'application/json',
-           'Access-Control-Allow-Origin': '',
-           'Access-Control-Allow-Headers': '',
-           'Access-Control-Allow-Methods': '*'
-         },
-         redirect: 'follow',
-         mode: 'no-cors'
-       };
+      requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '',
+          'Access-Control-Allow-Headers': '',
+          'Access-Control-Allow-Methods': '*'
+        },
+        redirect: 'follow',
+        mode: 'no-cors'
+      };
       var ingredients = encodeURI(labels.toString().replaceAll(',', ' '));
       const host = this.location.origin; // http://website.url
       const port = ":5000";
@@ -531,9 +531,14 @@
       console.log(invokeUrl + ingredients);
       console.log(requestOptions);
       console.log("geting recipes ...");
-      const res = await fetch(invokeUrl + ingredients, requestOptions);
-      const json2 = await res.json();
-      console.log("Recipes:", res);
+      await fetch(invokeUrl + ingredients, requestOptions)
+        .then(data => {
+          console.log(data);
+        }).catch(error => {
+          console.log(error);
+        });
+      //const json2 = await res.json();
+      //console.log("Recipes:", res);
 
 
     }
