@@ -530,8 +530,8 @@
       const invokeUrl = host + port + api;
       console.log("geting recipes ...");
       const res = await fetch(invokeUrl + ingredients, requestOptions);
-      const json2 = await res.json();
-      console.log("Recipes:", json2);
+      //const json2 = await res.json();
+      console.log("Recipes:", res);
 
     }
 
