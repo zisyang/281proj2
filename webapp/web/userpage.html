@@ -205,7 +205,8 @@
             <button v-if="!uploadURL" @click="removeImage">Remove image</button>
             <button v-if="!uploadURL" @click="uploadImage">Upload image</button>
           </div>
-          <h2 v-if="uploadURL">Success! Image uploaded to bucket. <button onclick="location.reload()">Upload new one</button></h2> 
+          <h2 v-if="uploadURL">Success! Image uploaded to bucket. <button onclick="location.reload()">Upload new
+              one</button></h2>
           <hr>
           Upload by:
           <input type="text" id="user_firstname" placeholder="firstname">
@@ -421,8 +422,8 @@
           var cellVal = body[i][col[j]]
           if (col[j] == "filename") {
             var url = body[i]['download_link'];
-            cellVal = "<img src='" + url + "' alt='" + fname + "' style='width:100px !important;height:100px !important;'>" + 
-            "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download " + fname + "</button>";
+            cellVal = "<img src='" + url + "' alt='" + fname + "' style='width:100px !important;height:100px !important;'>" +
+              "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download " + fname + "</button>";
           }
           else if (col[j] == "user_email") {
             cellVal = toEmail(cellVal);
@@ -435,7 +436,9 @@
             //cellVal = downloadlink(cellVal, body[i]['filename']);
             var url = cellVal;
             //var fname = body[i]['filename'];
-            cellVal = "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download</button>";
+            var urls = url.split('/');
+            var img = urls[urls.length-1];
+            cellVal = "<button onclick=\"getRecipeByAPI('" + img + "')\">Give Me Recipe</button>";
           }
           else if (col[j] == "is_delete") {
             var deleteId = body[i]['file_id'];
@@ -482,6 +485,26 @@
       getfileListByAPI();
     }
 
+    var getRecipeByAPI = async (s3objname) => {  //Start of get boooking reservation API
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      console.log(s3objname);
+      var raw = JSON.stringify({
+        "Image": s3objname
+      });
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
+      const json = await res.json();
+      // console.log(json);
+      const body = json; //.body;
+      console.log("body:", body);
+
+    }
 
     $(document).ready(function () {
       updateUsername();
