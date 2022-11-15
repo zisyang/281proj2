@@ -440,11 +440,11 @@
             //var fname = body[i]['filename'];
             var urls = url.split('/');
             var img = urls[urls.length - 1];
-            cellVal = "<button onclick=\"getRecipeByAPI('" + img + "')\">Give Me Recipe</button>";
+            cellVal = "<button onclick=\"getRecipeByAPI('" + img + "')\">Give Me Some Recipes</button>";
           }
           else if (col[j] == "is_delete") {
             var deleteId = body[i]['file_id'];
-            cellVal = "<button onclick=callRDSdeletebyAPI('" + deleteId + "')>delete</button>";
+            cellVal = "<button onclick=callRDSdeletebyAPI('" + deleteId + "')>Delete</button>";
           }
           else if (col[j] == "version") {
             var v = cellVal;
