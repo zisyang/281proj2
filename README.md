@@ -25,6 +25,12 @@ The question is: Given a picture of food, what else can you cook using the same 
 
 ## Sample Demo Screenshots
 ![](screenshots/Screen%20Shot%202022-10-13%20at%203.07.52%20PM.png)
+![](screenshots/Screen%20Shot%202022-10-13%20at%203.08.31%20PM.png)
+![](screenshots/Screen%20Shot%202022-10-13%20at%203.10.05%20PM.png)
+![](screenshots/Screen%20Shot%202022-10-13%20at%203.10.15%20PM.png)
+![](screenshots/Screen%20Shot%202022-10-13%20at%203.11.00%20PM.png)
+![](screenshots/Screen%20Shot%202022-10-13%20at%203.11.07%20PM.png)
+![](screenshots/Screen%20Shot%202022-10-13%20at%203.15.10%20PM.png)
 
 
 
