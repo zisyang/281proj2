@@ -374,6 +374,10 @@
         body: raw,
         redirect: 'follow'
       };
+
+      $('#fileList').empty();
+      $('#fileList').append("<p>loading files list ... </p>");
+
       console.log("loading files list by username ...");
       const res = await fetch(_config.api.invokeUrl + "/selectby", requestOptions);
       const json = await res.json();
