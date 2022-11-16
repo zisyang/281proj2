@@ -197,7 +197,6 @@
       <div class="input grid">
         <div id="app">
           <h1>Uploader</h1>
-
           <div v-if="!image">
             <h2>Select an image</h2>
             <input type="file" @change="onFileChange" accept="image/jpeg"></br>
@@ -207,8 +206,8 @@
             <button v-if="!uploadURL" @click="removeImage">Remove image</button>
             <button v-if="!uploadURL" @click="uploadImage">Upload image</button>
           </div>
-          <h2 v-if="uploadURL">Success! Image uploaded to bucket. <button onclick="location.reload()">Upload new
-              one</button></h2>
+          <h2 v-if="uploadURL">Success! Image uploaded to bucket. 
+            <button onclick="location.reload()"><i class="fa fa-refresh"></i>Upload new one</button></h2>
           <hr>
           Upload by:
           <input type="text" id="user_firstname" placeholder="firstname">
@@ -328,6 +327,7 @@
         }
   
       </script>
+
       <!-- files list -->
       <div class="w3-row-padding w3-padding-16">
         <div class="w3-margin-bottom">
