@@ -209,7 +209,8 @@
           <div v-else>
             <img :src="image" />
             <button v-if="!uploadURL" @click="removeImage"><i class="fa fa-remove"></i> Remove image</button>
-            <button v-if="!uploadURL" @click="uploadImage"><i class="fa fa-upload"></i> Upload image</button><div v-if="!uploadURL" id="uploadStatus"></div>
+            <button v-if="!uploadURL" @click="uploadImage"><i class="fa fa-upload"></i> Upload image</button>
+            <div v-if="!uploadURL" id="uploadStatus"></div>
           </div>
           <h2 v-if="uploadURL">Success! Image uploaded to bucket. </h2>
           <div v-if="uploadURL"><button onclick="location.reload()"><i class="fa fa-refresh"></i> Upload new one</button></div>
@@ -265,7 +266,7 @@
             },
             uploadImage: async function (e) {
               $('#uploadStatus').empty();
-              $('#uploadStatus').append("<i class='w3-spin fa fa-refresh'></i>");
+              $('#uploadStatus').append("<i class='w3-spin fa fa-refresh'></i> ...");
               console.log('Upload clicked')
               // Get the presigned URL
               const response = await axios({
