@@ -17,7 +17,7 @@ The question is: Given a picture of food, what else can you cook using the same 
 - Users/Admin can download uploaded file
 - Users can uploaded new version of file
 - Users/Admin can delete already uploaded file
-- Users can select the uploaded image file for recipes recommandation
+- Users can select the uploaded image file for recipes recommandations
 - Users can see a list of top 5 recommanded recipes
 - Users can see a list of the ingredients for each recipe
 - Users can click the link to external site for recipe detail 
@@ -107,14 +107,6 @@ To setup the backend (Amazon Linux in EC2):
 cd webapp/backendapi/
 sh setup.sh
 ```
-or
-```
-yum install docker -y
-systemctl start docker.service
-systemctl enable docker.service
-## Thanks to the jackmleitch's API
-docker pull jackmleitch/whatscooking:api 
-```
 
 To setup Frontend (Amazon Linux in EC2):
 ```
@@ -135,15 +127,6 @@ Run backend (Linux):
 cd webapp/backendapi/
 sh setup.sh
 ```
-or
-```
-yum install docker -y
-systemctl start docker.service
-systemctl enable docker.service
-## Thanks to the jackmleitch's API
-docker pull jackmleitch/whatscooking:api 
-docker run --net=host -p 5000:5000 -d jackmleitch/whatscooking:api
-```
 
 Run frontend (Linux):
 ```
@@ -159,4 +142,6 @@ cp -a /tmp/281proj2/webapp/web/* /var/www/html/
 ## Links
 
 - https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/
+- https://hub.docker.com/r/jackmleitch/whatscooking (Thanks to jackmleitch's API !)
+- https://www.allrecipes.com/
 - 
