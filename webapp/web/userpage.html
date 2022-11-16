@@ -204,10 +204,10 @@
           <div v-else>
             <img :src="image" />
             <button v-if="!uploadURL" @click="removeImage">Remove image</button>
-            <button v-if="!uploadURL" @click="uploadImage">Upload image</button>
+            <button v-if="!uploadURL" @click="uploadImage"><i class="fa fa-upload"></i> Upload image</button>
           </div>
           <h2 v-if="uploadURL">Success! Image uploaded to bucket. 
-            <button onclick="location.reload()"><i class="fa fa-refresh"></i>Upload new one</button></h2>
+            <button onclick="location.reload()"><i class="far fa-file-image"></i>Upload new one</button></h2>
           <hr>
           Upload by:
           <input type="text" id="user_firstname" placeholder="firstname">
@@ -377,7 +377,7 @@
       };
 
       $('#fileList').empty();
-      $('#fileList').append("<p>loading files list ... </p>");
+      $('#fileList').append("<p><i class='fa fa-refresh'></a> loading files list ... </p>");
 
       console.log("loading files list by username ...");
       const res = await fetch(_config.api.invokeUrl + "/selectby", requestOptions);
@@ -512,7 +512,7 @@
       };
 
       $('#recipesList').empty();
-      $('#recipesList').append("<p> Wait a moment please ... </p>");
+      $('#recipesList').append("<p><i class='fa fa-refresh'></a> Wait a moment please ... </p>");
 
       console.log("waiting rekognition ... ")
       const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
