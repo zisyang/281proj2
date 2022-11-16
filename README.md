@@ -31,6 +31,14 @@ The question is: Given a picture of food, what else can you cook using the same 
 ![](screenshots/Screen%20Shot%202022-10-13%20at%203.11.00%20PM.png)
 ![](screenshots/Screen%20Shot%202022-10-13%20at%203.11.07%20PM.png)
 ![](screenshots/Screen%20Shot%202022-10-13%20at%203.15.10%20PM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.44.13%20AM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.49.36%20AM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.49.46%20AM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.49.51%20AM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.50.13%20AM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.50.57%20AM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.51.31%20AM.png)
+![](screenshots/Screen%20Shot%202022-11-16%20at%203.55.48%20AM.png)
 
 
 ## Architecture Diagram
