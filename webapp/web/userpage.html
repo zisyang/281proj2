@@ -10,8 +10,10 @@
 
   <title>User HomePage</title>
 
-  <script src="https://unpkg.com/vue@1.0.28/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>
+  <!-- <script src="https://unpkg.com/vue@1.0.28/dist/vue.js"></script> -->
+  <!-- <script src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script> -->
+  <script src="js/vendor/dist/vue.js"></script>
+  <script src="js/vendor/dist/axios.min.js"></script>
   <script src="js/vendor/jquery-3.1.0.js"></script>
   <script src="js/vendor/bootstrap.min.js"></script>
   <script src="js/vendor/aws-cognito-sdk.min.js"></script>
@@ -580,7 +582,7 @@
           var cellVal = recipes[idx][col[j]];
           if (col[j] == "url") {
             var url = cellVal;
-            cellVal = "<a href='" + url + "'>" + url + "</a>";
+            cellVal = "<a href='" + url + "' target=_blank>" + url + "</a><br>(Open page in new window)";
           }
           tabCell.innerHTML = cellVal;
         }
