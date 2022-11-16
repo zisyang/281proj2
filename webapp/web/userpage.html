@@ -193,118 +193,6 @@
 
 
   <section class="book" id="Upload">
-    <script>
-      const MAX_IMAGE_SIZE = 10 * 1024 * 1024
-
-      /* ENTER YOUR ENDPOINT HERE */
-
-      const API_ENDPOINT = 'https://a8s4wuz1si.execute-api.us-west-1.amazonaws.com/uploads' // e.g. https://ab1234ab123.execute-api.us-east-1.amazonaws.com/uploads
-
-      new Vue({
-        el: "#app",
-        data: {
-          image: '',
-          uploadURL: '',
-          fileNAME: '',
-          uploadTIME: ''
-        },
-        methods: {
-          onFileChange(e) {
-            let files = e.target.files || e.dataTransfer.files
-            if (!files.length) return
-            console.log(files);
-            $("#description").val("image/jpeg")
-            this.createImage(files[0]);
-            this.fileNAME = files[0].name;
-          },
-          createImage(file) {
-            // var image = new Image()
-            let reader = new FileReader()
-            reader.onload = (e) => {
-              console.log('length: ', e.target.result.includes('data:image/jpeg'))
-              if (!e.target.result.includes('data:image/jpeg')) {
-                return alert('Wrong file type - JPG only.')
-              }
-              if (e.target.result.length > MAX_IMAGE_SIZE) {
-                return alert('Image is loo large.')
-              }
-              this.image = e.target.result
-            }
-            reader.readAsDataURL(file)
-          },
-          removeImage: function (e) {
-            console.log('Remove clicked')
-            this.image = ''
-          },
-          uploadImage: async function (e) {
-            console.log('Upload clicked')
-            // Get the presigned URL
-            const response = await axios({
-              method: 'GET',
-              url: API_ENDPOINT
-            })
-            console.log('Response: ', response)
-            console.log('Uploading: ', this.image)
-            let binary = atob(this.image.split(',')[1])
-            let array = []
-            for (var i = 0; i < binary.length; i++) {
-              array.push(binary.charCodeAt(i))
-            }
-            let blobData = new Blob([new Uint8Array(array)], { type: 'image/jpeg' })
-            console.log('Uploading to: ', response.uploadURL)
-            const result = await fetch(response.uploadURL, {
-              method: 'PUT',
-              body: blobData
-            })
-            console.log('Result: ', result)
-            // Final URL for the user doesn't need the query string params
-            //this.uploadURL = response.uploadURL.split('?')[0]
-            this.uploadURL = response.cdn.split('?')[0]
-            this.uploadTIME = new Date(response.uploadTime).toISOString();
-            console.log("uploadURL:" + this.uploadURL);
-            console.log("uploadTime: " + this.uploadTIME);
-
-            var raw = JSON.stringify({
-              "filename": this.fileNAME,
-              "user_email": username,
-              "user_firstname": $("#user_firstname").val(),
-              "user_lastname": $("#user_lastname").val(),
-              "upload_time": findUploadtime(this.fileNAME, this.uploadTIME),
-              "update_time": this.uploadTIME,
-              "description": $("#description").val(),
-              "download_link": this.uploadURL,
-              "version": getVersion(this.fileNAME)
-            });
-            console.log(raw);
-            callRDSaddfileAPI(raw);
-          }
-        }
-      })
-
-      var callRDSaddfileAPI = async (rawjson) => {  //Start of add file API
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        var raw = rawjson;
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-          redirect: 'follow'
-        };
-        console.log("adding to db ... ");
-        const res = await fetch(_config.api.invokeUrl + "/add", requestOptions);
-        const json = await res.json();
-        console.log("res: ");
-        console.log(json);
-        if (json.affectedRows == "0" || json.affectedRows == null) {
-          alert("Sorry! add to DB unsuccessfully")
-        } else {
-          console.log("add to DB successful");
-        }
-        getfileListByAPI();
-      }
-
-    </script>
     <div class="container flex">
       <div class="input grid">
         <div id="app">
@@ -328,7 +216,118 @@
           <input type="text" id="description" placeholder="description" size="50">
         </div>
       </div>
-
+      <script>
+        const MAX_IMAGE_SIZE = 10 * 1024 * 1024
+  
+        /* ENTER YOUR ENDPOINT HERE */
+  
+        const API_ENDPOINT = 'https://a8s4wuz1si.execute-api.us-west-1.amazonaws.com/uploads' // e.g. https://ab1234ab123.execute-api.us-east-1.amazonaws.com/uploads
+  
+        new Vue({
+          el: "#app",
+          data: {
+            image: '',
+            uploadURL: '',
+            fileNAME: '',
+            uploadTIME: ''
+          },
+          methods: {
+            onFileChange(e) {
+              let files = e.target.files || e.dataTransfer.files
+              if (!files.length) return
+              console.log(files);
+              $("#description").val("image/jpeg")
+              this.createImage(files[0]);
+              this.fileNAME = files[0].name;
+            },
+            createImage(file) {
+              // var image = new Image()
+              let reader = new FileReader()
+              reader.onload = (e) => {
+                console.log('length: ', e.target.result.includes('data:image/jpeg'))
+                if (!e.target.result.includes('data:image/jpeg')) {
+                  return alert('Wrong file type - JPG only.')
+                }
+                if (e.target.result.length > MAX_IMAGE_SIZE) {
+                  return alert('Image is loo large.')
+                }
+                this.image = e.target.result
+              }
+              reader.readAsDataURL(file)
+            },
+            removeImage: function (e) {
+              console.log('Remove clicked')
+              this.image = ''
+            },
+            uploadImage: async function (e) {
+              console.log('Upload clicked')
+              // Get the presigned URL
+              const response = await axios({
+                method: 'GET',
+                url: API_ENDPOINT
+              })
+              console.log('Response: ', response)
+              console.log('Uploading: ', this.image)
+              let binary = atob(this.image.split(',')[1])
+              let array = []
+              for (var i = 0; i < binary.length; i++) {
+                array.push(binary.charCodeAt(i))
+              }
+              let blobData = new Blob([new Uint8Array(array)], { type: 'image/jpeg' })
+              console.log('Uploading to: ', response.uploadURL)
+              const result = await fetch(response.uploadURL, {
+                method: 'PUT',
+                body: blobData
+              })
+              console.log('Result: ', result)
+              // Final URL for the user doesn't need the query string params
+              //this.uploadURL = response.uploadURL.split('?')[0]
+              this.uploadURL = response.cdn.split('?')[0]
+              this.uploadTIME = new Date(response.uploadTime).toISOString();
+              console.log("uploadURL:" + this.uploadURL);
+              console.log("uploadTime: " + this.uploadTIME);
+  
+              var raw = JSON.stringify({
+                "filename": this.fileNAME,
+                "user_email": username,
+                "user_firstname": $("#user_firstname").val(),
+                "user_lastname": $("#user_lastname").val(),
+                "upload_time": findUploadtime(this.fileNAME, this.uploadTIME),
+                "update_time": this.uploadTIME,
+                "description": $("#description").val(),
+                "download_link": this.uploadURL,
+                "version": getVersion(this.fileNAME)
+              });
+              console.log(raw);
+              callRDSaddfileAPI(raw);
+            }
+          }
+        })
+  
+        var callRDSaddfileAPI = async (rawjson) => {  //Start of add file API
+          var myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+          var raw = rawjson;
+          var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+          };
+          console.log("adding to db ... ");
+          const res = await fetch(_config.api.invokeUrl + "/add", requestOptions);
+          const json = await res.json();
+          console.log("res: ");
+          console.log(json);
+          if (json.affectedRows == "0" || json.affectedRows == null) {
+            alert("Sorry! add to DB unsuccessfully")
+          } else {
+            console.log("add to DB successful");
+          }
+          getfileListByAPI();
+        }
+  
+      </script>
       <!-- files list -->
       <div class="w3-row-padding w3-padding-16">
         <div class="w3-margin-bottom">
