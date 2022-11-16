@@ -53,7 +53,7 @@ The question is: Given a picture of food, what else can you cook using the same 
 - NodeJS
 
 
-To setup the backend :
+To setup the backend (Amazon Linux in EC2):
 ```
 #recipes backend api 
 cd webapp/backendapi/
@@ -63,7 +63,7 @@ systemctl enable docker.service
 ## Thanks to the jackmleitch's API
 docker pull jackmleitch/whatscooking:api 
 ```
-To setup Frontend :
+To setup Frontend (Amazon Linux in EC2):
 ```
 #web frontend
 yum install httpd.x86_64 -y
