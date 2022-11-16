@@ -94,6 +94,10 @@ Run backend (Linux):
 ```
 #recipes backend api 
 cd webapp/backendapi/
+sh setup.sh
+```
+or
+```
 yum install docker -y
 systemctl start docker.service
 systemctl enable docker.service
