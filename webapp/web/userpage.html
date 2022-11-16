@@ -448,7 +448,7 @@
             //var fname = body[i]['filename'];
             var urls = url.split('/');
             var img = urls[urls.length - 1];
-            cellVal = "<a href='#recommand><button onclick=\"getRecipeByAPI('" + img + "')\">Give Me Some Recipes</button></a>";
+            cellVal = "<a href='#recommand'><button onclick=\"getRecipeByAPI('" + img + "')\">Give Me Some Recipes</button></a>";
           }
           else if (col[j] == "is_delete") {
             var deleteId = body[i]['file_id'];
