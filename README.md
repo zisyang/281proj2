@@ -47,6 +47,15 @@ The question is: Given a picture of food, what else can you cook using the same 
 - AWS S3 presigned URLs with SAM
 - AWS SDK
   
+## Tree of code
+```
+.
+├── webapp/            <-- This is to run in app-tier EC2 instances
+├── webapp/web/         <-- This is to run in app-tier EC2 instances
+├── lambda/            <-- This contains codes to run in each Lambda functions
+```
+
+
 ### Required Tools Locally
 - AWS CLI
 - AWS SAM CLI
@@ -57,12 +66,17 @@ To setup the backend (Amazon Linux in EC2):
 ```
 #recipes backend api 
 cd webapp/backendapi/
+sh setup.sh
+```
+or
+```
 yum install docker -y
 systemctl start docker.service
 systemctl enable docker.service
 ## Thanks to the jackmleitch's API
 docker pull jackmleitch/whatscooking:api 
 ```
+
 To setup Frontend (Amazon Linux in EC2):
 ```
 #web frontend
