@@ -207,7 +207,7 @@
           </div>
           <div v-else>
             <img :src="image" />
-            <button v-if="!uploadURL" @click="removeImage">Remove image</button>
+            <button v-if="!uploadURL" @click="removeImage"><i class="fa fa-remove"></i> Remove image</button>
             <button v-if="!uploadURL" @click="uploadImage"><i class="fa fa-upload"></i> Upload image</button>
           </div>
           <h2 v-if="uploadURL">Success! Image uploaded to bucket. </h2>
@@ -453,7 +453,7 @@
             //var fname = body[i]['filename'];
             var urls = url.split('/');
             var img = urls[urls.length - 1];
-            cellVal = "<button onclick=\"jumpto('recommand'); getRecipeByAPI('" + img + "')\">Give Me Some Recipes</button>";
+            cellVal = "<button onclick=\"jumpto('recommand'); getRecipeByAPI('" + img + "')\"><i class='fa fa-search'></i> Give Me Some Recipes</button>";
           }
           else if (col[j] == "is_delete") {
             var deleteId = body[i]['file_id'];
