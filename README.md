@@ -41,6 +41,7 @@ The question is: Given a picture of food, what else can you cook using the same 
 - API Gateway
 - IAM
 - S3
+- Rekognition 
 - CloudFront
 - Route 53 (Optional)
 - CloudWatch
@@ -50,16 +51,45 @@ The question is: Given a picture of food, what else can you cook using the same 
 ## Tree of code
 ```
 .
-├── webapp/            <-- This is to run in app-tier EC2 instances
-├── webapp/web/         <-- This is to run in app-tier EC2 instances
 ├── lambda/            <-- This contains codes to run in each Lambda functions
+├── webapp/app         <-- This is to run in app-tier EC2 instances 
+├── webapp/web/        <-- This is to run in web-tier EC2 instances
+(To save AWS service cost, you can combine app/ and web/ running on the same app-tier, and run a bastion machine in web-tier to access the 3-tier architectures)
 ```
+## Architecture Diagram
+![](architecture_diagram.png)
 
+## Database ERR Diagram
+![](rds/database281.png)
+
+### MYSQL Table
+```
+DESC files;
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| file_id        | int          | NO   | PRI | NULL    | auto_increment |
+| filename       | varchar(45)  | NO   | PRI | NULL    |                |
+| user_email     | varchar(255) | NO   | PRI | NULL    |                |
+| user_firstname | varchar(255) | YES  |     | NULL    |                |
+| user_lastname  | varchar(45)  | YES  |     | NULL    |                |
+| upload_time    | timestamp    | NO   |     | NULL    |                |
+| update_time    | timestamp    | NO   |     | NULL    |                |
+| description    | varchar(255) | YES  |     | NULL    |                |
+| download_link  | varchar(45)  | YES  |     | NULL    |                |
+| is_delete      | tinyint      | YES  |     | 0       |                |
+| version        | int          | YES  |     | NULL    |                |
+```
 
 ### Required Tools Locally
 - AWS CLI
 - AWS SAM CLI
 - NodeJS
+- Docker
+- Git
+- Httpd
+- Mysql
+- MySQLWorkbench
+- VSCode
 
 
 To setup the backend (Amazon Linux in EC2):
