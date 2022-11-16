@@ -6,7 +6,7 @@
 
 
 ## Project Introduction
-The question is: Given a picture of food, what else can you cook using the same ingredients? Which means that, what recipes can I make with the food from my kitchen? So, the idea of the project is that let user upload a picture of the food, then using AWS Rekongition to find out what the ingredients contain in the picture, then parse them to the ML model API to find recommanded recipes for the users.
+The question is: Given a picture of food, what else can you cook using the same ingredients? Which means that, what recipes can you make with the food from your kitchen? So, the idea of the project is that let user upload a picture of the food, then using AWS Rekongition to find out what the ingredients contain in the picture, then parse them to the ML model API to find recommanded recipes for the users.
 
 
 ## Features
