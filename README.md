@@ -33,6 +33,9 @@ The question is: Given a picture of food, what else can you cook using the same 
 ![](screenshots/Screen%20Shot%202022-10-13%20at%203.15.10%20PM.png)
 
 
+## Architecture Diagram
+![](architecture_diagram.png)
+
 
 ## Pre-requisites Set Up
 
@@ -53,7 +56,18 @@ The question is: Given a picture of food, what else can you cook using the same 
 - CloudWatch
 - AWS S3 presigned URLs with SAM
 - AWS SDK
-  
+
+### Required Tools Locally
+- AWS CLI
+- AWS SAM CLI
+- NodeJS
+- Docker
+- Git
+- Httpd
+- Mysql
+- MySQLWorkbench
+- VSCode
+
 ## Tree of code
 ```
 .
@@ -61,10 +75,10 @@ The question is: Given a picture of food, what else can you cook using the same 
 ├── webapp/app/        <-- This is to run in app-tier EC2 instances 
 ├── webapp/web/        <-- This is to run in web-tier EC2 instances
 ```
-## Architecture Diagram
-![](architecture_diagram.png)
 
-## Database ERR Diagram
+## Database setup
+
+### ERR Diagram
 ![](rds/database281.png)
 
 ### MYSQL Table
@@ -85,17 +99,7 @@ DESC files;
 | version        | int          | YES  |     | NULL    |                |
 ```
 
-### Required Tools Locally
-- AWS CLI
-- AWS SAM CLI
-- NodeJS
-- Docker
-- Git
-- Httpd
-- Mysql
-- MySQLWorkbench
-- VSCode
-
+## Site setup
 
 To setup the backend (Amazon Linux in EC2):
 ```
@@ -151,3 +155,8 @@ cd /tmp
 git clone https://github.com/zisyang/281proj2.git
 cp -a /tmp/281proj2/webapp/web/* /var/www/html/
 ```
+
+## Links
+
+- https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/
+- 
