@@ -85,7 +85,7 @@
     <div class="w3-margin-bottom">
       <div class="w3-container w3-white">
         <h3>List of the files uploaded by all users</h3>
-        <button type="button" onclick="getfileListAPI()">Get uploaded file List</button>
+        <button type="button" onclick="getfileListAPI()"><i class="fa fa-refresh"></i> Get uploaded file List</button>
         <p class="styled-table" id="fileList" style="overflow: auto;"> </p>
       </div>
     </div>
@@ -116,7 +116,7 @@
       }
 
 
-      var getfileListAPI = async () => {  //Start of get boooking reservation API
+      var getfileListAPI = async () => {  //Start of get file list API
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         var requestOptions = {
@@ -124,6 +124,11 @@
           headers: myHeaders,
           redirect: 'follow'
         };
+
+        $('#fileList').empty();
+        $('#fileList').append("<p><i class='w3-jumbo w3-spin fa fa-refresh'></i> loading files list ... </p>");
+  
+        console.log("loading files list ...");
         const res = await fetch(_config.api.invokeUrl + "/selectall", requestOptions);
         const json = await res.json();
         // console.log(json);
@@ -178,18 +183,18 @@
           }
         }
 
-        var divContainer = document.getElementById("fileList");
+        $('#fileList').empty();
         if (ilen == 0) {
-          divContainer.innerHTML = "Nothing uploaded";
+          $('#fileList').append("<p>Nothing uploaded</p>");
         }
         else {
-          divContainer.innerHTML = "";
-          divContainer.appendChild(table);
+          $('#fileList').append(table);
         }
+  
       }
       
       
-    var callRDSdeletebyAPI = async (deleteId) => {  //Start of cancelling hotel API
+    var callRDSdeletebyAPI = async (deleteId) => {  //Start of delete file API
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       var raw = JSON.stringify({
