@@ -438,7 +438,7 @@
           if (col[j] == "filename") {
             var url = body[i]['download_link'];
             cellVal = "<img src='" + url + "' alt='" + fname + "' style='width:100px !important;height:100px !important;'>" +
-              "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\">Download " + fname + "</button>";
+              "<button onclick=\"downloadlink('" + url + "', '" + fname + "')\"><i class='fa fa-download'></i> " + fname + "</button>";
           }
           else if (col[j] == "user_email") {
             cellVal = toEmail(cellVal);
@@ -457,7 +457,7 @@
           }
           else if (col[j] == "is_delete") {
             var deleteId = body[i]['file_id'];
-            cellVal = "<button onclick=callRDSdeletebyAPI('" + deleteId + "')>Delete</button>";
+            cellVal = "<button onclick=callRDSdeletebyAPI('" + deleteId + "')><i class='fa fa-remove'></i> Delete</button>";
           }
           else if (col[j] == "version") {
             var v = cellVal;
