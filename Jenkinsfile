@@ -29,7 +29,7 @@ pipeline {
                     for i in $(sudo cat /home/ec2-user/web_host.txt)
                     do
                     sudo scp -r -i /home/ec2-user/281proj.pem 281proj2/webapp/ ec2-user@$i:/home/ec2-user/
-                    sudo ssh -i /home/ec2-user/281proj.pem ec2-user@$i sudo cp -a /home/ec2-user/webapp/web/* /var/www/html/
+                    sudo ssh -i /home/ec2-user/281proj.pem ec2-user@$i sudo cp -av /home/ec2-user/webapp/web/* /var/www/html/
                     done
                 '''
             }
