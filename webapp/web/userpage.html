@@ -333,7 +333,7 @@
         <div class="w3-margin-bottom">
           <div class="w3-container w3-white">
             <h3>List of the files uploaded</h3>
-            <button type="button" onclick="getfileListByAPI()">Refresh the List</button>
+            <button type="button" onclick="getfileListByAPI()"><i class="fa fa-refresh"></i> Refresh the List</button>
             <p class="styled-table" id="fileList" style="overflow: auto;"> </p>
           </div>
         </div>
@@ -377,7 +377,7 @@
       };
 
       $('#fileList').empty();
-      $('#fileList').append("<p><i class='fa fa-refresh'></a> loading files list ... </p>");
+      $('#fileList').append("<p><i class='w3-jumbo w3-spin fa fa-refresh'></a> loading files list ... </p>");
 
       console.log("loading files list by username ...");
       const res = await fetch(_config.api.invokeUrl + "/selectby", requestOptions);
@@ -512,7 +512,7 @@
       };
 
       $('#recipesList').empty();
-      $('#recipesList').append("<p><i class='fa fa-refresh'></a> Wait a moment please ... </p>");
+      $('#recipesList').append("<p><i class='w3-jumbo w3-spin fa fa-refresh'></a> Wait a moment please ... </p>");
 
       console.log("waiting rekognition ... ")
       const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
