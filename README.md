@@ -52,9 +52,10 @@ The question is: Given a picture of food, what else can you cook using the same 
 ```
 .
 ├── lambda/            <-- This contains codes to run in each Lambda functions
-├── webapp/app         <-- This is to run in app-tier EC2 instances 
+├── webapp/app/         <-- This is to run in app-tier EC2 instances 
 ├── webapp/web/        <-- This is to run in web-tier EC2 instances
-(To save AWS service cost, you can combine app/ and web/ running on the same app-tier, and run a bastion machine in web-tier to access the 3-tier architectures)
+(To save AWS service cost, for my case to combine app/ and web/ running on the same app-tier, 
+and run a bastion machine in web-tier to access the 3-tier architectures)
 ```
 ## Architecture Diagram
 ![](architecture_diagram.png)
