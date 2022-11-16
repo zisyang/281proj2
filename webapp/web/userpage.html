@@ -377,7 +377,7 @@
       };
 
       $('#fileList').empty();
-      $('#fileList').append("<p><i class='w3-jumbo w3-spin fa fa-refresh'></a> loading files list ... </p>");
+      $('#fileList').append("<p><i class='w3-jumbo w3-spin fa fa-refresh'></i> loading files list ... </p>");
 
       console.log("loading files list by username ...");
       const res = await fetch(_config.api.invokeUrl + "/selectby", requestOptions);
@@ -512,7 +512,7 @@
       };
 
       $('#recipesList').empty();
-      $('#recipesList').append("<p><i class='w3-jumbo w3-spin fa fa-refresh'></a> Wait a moment please ... </p>");
+      $('#recipesList').append("<p><i class='w3-jumbo w3-spin fa fa-refresh'></i> Wait a moment please ... </p>");
 
       console.log("waiting rekognition ... ")
       const res = await fetch(_config.api.invokeUrl + "/rek", requestOptions);
