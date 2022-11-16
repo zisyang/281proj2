@@ -6,7 +6,7 @@
 
 
 ## Project Introduction
-The question is: Given a picture of food, what else can you cook using the same ingredients? Which means that, what recipes can you make with the food from the kitchen? So, the idea of the project is that let user upload a picture of the food, then using AWS Rekongition to find out what the ingredients contain in the picture, then parse them to the ML model API to find recommanded recipes for the users.
+The question is: Given a picture of food, what else can you cook using the same ingredients? Which means that, what recipes can you make with the food from the kitchen? So, the idea of the project is that let users upload a picture of the food, then using AWS Rekongition to find out what the ingredients contain in the picture, then parse them to the ML model API to find recommended recipes for the users.
 
 
 ## Features
@@ -146,7 +146,10 @@ git clone https://github.com/zisyang/281proj2.git
 cp -a /tmp/281proj2/webapp/web/* /var/www/html/
 ```
 
-## Links
+## Website URL:
+http://281proj2.team-strikers.link
+
+## Reference Links
 
 - https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/
 - https://hub.docker.com/r/jackmleitch/whatscooking (Thanks to jackmleitch's API !)
