@@ -337,8 +337,10 @@
           </div>
         </div>
       </div>
-      <a href="#recommand"></a>
-      <p class="styled-table" id="recipesList" style="overflow: auto;"> </p>
+      <div class="w3-container w3-white">
+        <a href="#recommand"></a>
+        <p class="styled-table" id="recipesList" style="overflow: auto;"> </p>
+      </div>
     </div>
   </section>
 
@@ -457,10 +459,10 @@
 
       $('#fileList').empty();
       if (ilen == 0) {
-        $('#fileList').append("<p>Nothing uploaded</p>");  
+        $('#fileList').append("<p>Nothing uploaded</p>");
       }
       else {
-        $('#fileList').append(table);  
+        $('#fileList').append(table);
       }
 
     }
@@ -545,18 +547,18 @@
       console.log(goodidx);
 
       col.sort((a, b) => {
-        if(!sortMap.hasOwnProperty(a) & !sortMap.hasOwnProperty(b)) {
+        if (!sortMap.hasOwnProperty(a) & !sortMap.hasOwnProperty(b)) {
           return 0;
         }
-        if(!sortMap.hasOwnProperty(a)) {
+        if (!sortMap.hasOwnProperty(a)) {
           return 1;
         }
-        if(!sortMap.hasOwnProperty(b)) {
+        if (!sortMap.hasOwnProperty(b)) {
           return -1;
         }
-        return sortMap[a]-sortMap[b];
+        return sortMap[a] - sortMap[b];
       });
-      
+
       var table = document.createElement("table");
       var tr = table.insertRow(-1);
 
@@ -569,10 +571,10 @@
       for (var i = 0; i < goodidx.length; i++) {
         idx = goodidx[i];
         tr = table.insertRow(-1);
-        for (var j = 0; j< col.length; j++) {
+        for (var j = 0; j < col.length; j++) {
           var tabCell = tr.insertCell(-1);
           var cellVal = recipes[idx][col[j]];
-          if(col[j] == "url") {
+          if (col[j] == "url") {
             var url = cellVal;
             cellVal = "<a href='" + url + "'>" + url + "</a>";
           }
