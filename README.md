@@ -21,6 +21,7 @@ So, the idea of this project is to let users upload a picture of the food, then 
   - [Database setup](#database-setup)
     - [ERR Diagram](#err-diagram)
     - [MYSQL Table](#mysql-table)
+    - [MYSQL Initial Script](#mysql-initial-script)
   - [Site setup](#site-setup)
     - [How to set up and run project locally?](#how-to-set-up-and-run-project-locally)
   - [Website URL](#website-url)
