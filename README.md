@@ -1,4 +1,4 @@
-# Project #2-zisyang-Foto2recipe
+# Project #2-zisyang-Foto2Recipes
 - University Name: [San Jose State University](http://www.sjsu.edu/)
 - Course: [CMPE 281 - Cloud Technologies](http://info.sjsu.edu/web-dbgen/catalog/courses/CMPE281.html)
 - Professor: [Sanjay Garje](https://www.linkedin.com/in/sanjaygarje/)
