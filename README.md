@@ -10,22 +10,24 @@ People often take photos when they are in restaurants, and share the pictures of
 So, the idea of this project is to let users upload a picture of the food, then using AWS Rekognition to find out what the ingredients contain in the picture by labeling, then parse them to the ML model API to find recommended recipes for the users.
 
 ## Table of content
-- [Project Introduction](!#project-introduction)
-- [Table of content](!#table-of-content)
-- [Features](!#features)
-- [Sample Demo Screenshots](!#sample-demo-screenshots)
-- [Architecture Diagram](!#architecture-diagram)
-- [Pre-requisites Set Up](!#pre-requisites-set-up)
-   - [AWS Services](!#aws-services)
-   - [Required Tools Install Locally](!#required-tools-install-locally)
-   - [Tree of code](!#tree-of-code)
-- [Database setup](!#database-setup)
-   - [ERR Diagram](!#err-diagram)
-   - [MYSQL Table](!#mysql-table)
-- [Site setup](!#site-setup)
-   - [How to set up and run project locally?](!#how-to-set-up-and-run-project-locally?)
-- [Website URL:](!#website-url:)
-- [Reference Links](!#reference-links)
+- [Project #2-zisyang](#project-2-zisyang)
+  - [Project Introduction](#project-introduction)
+  - [Table of content](#table-of-content)
+  - [Features](#features)
+  - [Sample Demo Screenshots](#sample-demo-screenshots)
+  - [Architecture Diagram](#architecture-diagram)
+  - [Pre-requisites Set Up](#pre-requisites-set-up)
+    - [AWS Services](#aws-services)
+    - [Required Tools Install Locally](#required-tools-install-locally)
+    - [Tree of code](#tree-of-code)
+  - [Database setup](#database-setup)
+    - [ERR Diagram](#err-diagram)
+    - [MYSQL Table](#mysql-table)
+  - [Site setup](#site-setup)
+    - [How to set up and run project locally?](#how-to-set-up-and-run-project-locally)
+  - [Website URL](#website-url)
+  - [Reference Links](#reference-links)
+
 
 ## Features
 - Users Login
@@ -164,7 +166,7 @@ git clone https://github.com/zisyang/281proj2.git
 cp -a /tmp/281proj2/webapp/web/* /var/www/html/
 ```
 
-## Website URL:
+## Website URL
 http://281proj2.team-strikers.link
 
 
