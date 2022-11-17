@@ -179,4 +179,3 @@ http://281proj2.team-strikers.link
 - https://hub.docker.com/r/jackmleitch/whatscooking
 - https://www.allrecipes.com/recipes/
 - https://www.jamieoliver.com/recipes/
-- 
