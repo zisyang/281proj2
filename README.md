@@ -9,6 +9,8 @@
 People often take photos when they are in restaurants, and share the pictures of their favorite food to social media. Friends of theirs could bring up some idea or question like: Given a picture of food, what else can you cook using the same ingredients? Which means that, what recipes can you make with the food from the kitchen? 
 So, the idea of this project is to let users upload a picture of the food, then using AWS Rekognition to find out what the ingredients contain in the picture by labeling, then parse them to the ML model API to find recommended recipes for the users.
 
+## Table of content
+- [Project Introduction](#project introduction)
 
 
 ## Features
