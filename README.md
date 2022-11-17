@@ -97,6 +97,7 @@ So, the idea of this project is to let users upload a picture of the food, then 
 ```
 .
 ├── lambda/            <-- This contains codes to run in each Lambda functions
+├── rds/SQL/           <-- This contains script to initialize the database & creat table
 ├── webapp/app/        <-- This is to run in app-tier EC2 instances 
 ├── webapp/web/        <-- This is to run in web-tier EC2 instances
 ```
@@ -122,6 +123,10 @@ DESC files;
 | download_link  | varchar(45)  | YES  |     | NULL    |                |
 | is_delete      | tinyint      | YES  |     | 0       |                |
 | version        | int          | YES  |     | NULL    |                |
+```
+### MYSQL Initial Script
+```
+rds/SQL/createinitialsetup.sql
 ```
 
 ## Site setup
