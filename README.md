@@ -11,7 +11,6 @@ So, the idea of this project is to let users upload a picture of the food, then 
 
 ## Table of content
   - [Project Introduction](#project-introduction)
-  - [Table of content](#table-of-content)
   - [Features](#features)
   - [Sample Demo Screenshots](#sample-demo-screenshots)
   - [Architecture Diagram](#architecture-diagram)
