@@ -66,7 +66,7 @@ So, the idea of this project is to let users upload a picture of the food, then 
 - AWS S3 presigned URLs with SAM
 - AWS SDK
 
-### Required Tools Locally
+### Required Tools Install Locally
 - AWS CLI
 - AWS SAM CLI
 - NodeJS
