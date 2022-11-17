@@ -59,7 +59,7 @@ The question is: Given a picture of food, what else can you cook using the same 
 - S3
 - Rekognition 
 - CloudFront
-- Route 53 (Optional)
+- Route 53
 - CloudWatch
 - AWS S3 presigned URLs with SAM
 - AWS SDK
@@ -153,6 +153,8 @@ http://281proj2.team-strikers.link
 ## Reference Links
 
 - https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/
-- https://hub.docker.com/r/jackmleitch/whatscooking (Thanks to jackmleitch's API !)
-- https://www.allrecipes.com/
+- 
+- https://hub.docker.com/r/jackmleitch/whatscooking
+- https://www.allrecipes.com/recipes/
+- https://www.jamieoliver.com/recipes/
 - 
