@@ -10,8 +10,22 @@ People often take photos when they are in restaurants, and share the pictures of
 So, the idea of this project is to let users upload a picture of the food, then using AWS Rekognition to find out what the ingredients contain in the picture by labeling, then parse them to the ML model API to find recommended recipes for the users.
 
 ## Table of content
-- [Project Introduction](#project introduction)
-
+- [Project Introduction](!project-introduction)
+- [Table of content](!table-of-content)
+- [Features](!features)
+- [Sample Demo Screenshots](!sample-demo-screenshots)
+- [Architecture Diagram](!architecture-diagram)
+- [Pre-requisites Set Up](!pre-requisites-set-up)
+   - [AWS Services](!aws-services)
+   - [Required Tools Install Locally](!required-tools-install-locally)
+   - [Tree of code](!tree-of-code)
+- [Database setup](!database-setup)
+   - [ERR Diagram](!err-diagram)
+   - [MYSQL Table](!mysql-table)
+- [Site setup](!site-setup)
+   - [How to set up and run project locally?](!how-to-set-up-and-run-project-locally?)
+- [Website URL:](!website-url:)
+- [Reference Links](!reference-links)
 
 ## Features
 - Users Login
@@ -50,7 +64,7 @@ So, the idea of this project is to let users upload a picture of the food, then 
 
 ## Pre-requisites Set Up
 
-### AWS Services:
+### AWS Services
 - Cognito
 - VPC
 - EC2
@@ -79,7 +93,7 @@ So, the idea of this project is to let users upload a picture of the food, then 
 - MySQLWorkbench
 - VSCode
 
-## Tree of code
+### Tree of code
 ```
 .
 ├── lambda/            <-- This contains codes to run in each Lambda functions
