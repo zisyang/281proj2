@@ -21,7 +21,7 @@ So, the idea of this project is to let users upload a picture of the food, then 
   - [Database setup](#database-setup)
     - [ERR Diagram](#err-diagram)
     - [MYSQL Table](#mysql-table)
-    - [MYSQL Initial Script](#mysql-initial-script)
+    - [MYSQL Initial Setup Script](#mysql-initial-setup-script)
   - [Site setup](#site-setup)
     - [How to set up and run project locally?](#how-to-set-up-and-run-project-locally)
   - [Website URL](#website-url)
@@ -125,7 +125,7 @@ DESC files;
 | is_delete      | tinyint      | YES  |     | 0       |                |
 | version        | int          | YES  |     | NULL    |                |
 ```
-### MYSQL Initial Script
+### MYSQL Initial Setup Script
 ```
 rds/SQL/createinitialsetup.sql
 ```
