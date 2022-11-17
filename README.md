@@ -6,7 +6,9 @@
 
 
 ## Project Introduction
-The question is: Given a picture of food, what else can you cook using the same ingredients? Which means that, what recipes can you make with the food from the kitchen? So, the idea of the project is that let users upload a picture of the food, then using AWS Rekongition to find out what the ingredients contain in the picture, then parse them to the ML model API to find recommended recipes for the users.
+People often take photos when they are in restaurants, and share the pictures of their favorite food to social media. Friends of theirs could bring up some idea or question like: Given a picture of food, what else can you cook using the same ingredients? Which means that, what recipes can you make with the food from the kitchen? 
+So, the idea of this project is to let users upload a picture of the food, then using AWS Rekognition to find out what the ingredients contain in the picture by labeling, then parse them to the ML model API to find recommended recipes for the users.
+
 
 
 ## Features
@@ -153,7 +155,11 @@ http://281proj2.team-strikers.link
 ## Reference Links
 
 - https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/
-- 
+- https://docs.aws.amazon.com/rekognition/latest/dg/images-s3.html
+- https://docs.aws.amazon.com/rekognition/latest/dg/labels-detect-labels-image.html
+- https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/ex-lambda.html
+- https://www.amazon.science/blog/using-food-images-to-find-cooking-recipes
+- https://towardsdatascience.com/building-a-recipe-recommendation-system-297c229dda7b
 - https://hub.docker.com/r/jackmleitch/whatscooking
 - https://www.allrecipes.com/recipes/
 - https://www.jamieoliver.com/recipes/
