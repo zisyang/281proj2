@@ -171,9 +171,8 @@ cp -a /tmp/281proj2/webapp/web/* /var/www/html/
 ```
 
 ## Website URL
-http://281proj2.team-strikers.link
-
-http://dualstack.webapp-asg-1-18172958.us-west-1.elb.amazonaws.com/
+- http://281proj2.team-strikers.link
+- http://dualstack.webapp-asg-1-18172958.us-west-1.elb.amazonaws.com/
 
 
 ## Reference Links
